@@ -1,0 +1,74 @@
+stages:
+  - pre-commit
+  - test
+  - deploy
+
+# --------------------------------------------------
+# 1) Lint only on MRs
+# --------------------------------------------------
+pre-commit:
+  stage: pre-commit
+  image: python:3.11
+  only:
+    - merge_requests
+  before_script:
+    - pip install pre-commit
+  script:
+    - pre-commit run --all-files
+
+# --------------------------------------------------
+# 2) Run tests
+# --------------------------------------------------
+test:
+  stage: test
+  image: python:3.11
+  tags:
+    - k8s
+  needs:
+    - job: pre-commit
+  only:
+    - merge_requests
+  variables:
+    POSTGRES_DB: $DB_NAME
+    POSTGRES_USER: $DB_USERNAME
+    POSTGRES_PASSWORD: $DB_PASSWORD
+  services:
+    - name: postgres:13-alpine
+      alias: $DB_HOST
+  before_script:
+    - apt-get update && apt-get install -y postgresql-client
+    # ensure the compiled extensions are here:
+    - echo "Compiled extensions:"
+    - find . -type f -name '*.so' -print
+    - psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USERNAME" -d "$DB_NAME" -c 'SELECT version();'
+    - |
+      cat <<EOF > .env
+      DB_HOST=$DB_HOST
+      DB_PORT=$DB_PORT
+      DB_USERNAME=$DB_USERNAME
+      DB_PASSWORD=$DB_PASSWORD
+      DB_NAME=$DB_NAME
+      DB_SCHEMA=$DB_SCHEMA
+      EOF
+    - pip install poetry
+    - poetry install --with dev
+  script:
+    - poetry run pytest tests/
+
+# --------------------------------------------------
+# 3) Release branch on tags
+# --------------------------------------------------
+create_release_branch:
+  stage: deploy
+  image: alpine:3
+  only:
+    - tags
+  before_script:
+    - apk add --no-cache git
+    - git config --global user.name  "GitLab CI"
+    - git config --global user.email "ci@example.com"
+  script:
+    - RELEASE_BRANCH="release_${CI_COMMIT_REF_NAME}"
+    - git remote set-url origin https://gitlab-ci-token:${CI_PUSH_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git
+    - git checkout -b "$RELEASE_BRANCH"
+    - git push origin "$RELEASE_BRANCH"

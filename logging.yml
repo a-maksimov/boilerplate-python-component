@@ -1,0 +1,36 @@
+version: 1
+disable_existing_loggers: false
+
+formatters:
+  simple:
+    format: '%(asctime)s.%(msecs)03d %(levelname)-8s %(message)s (%(module)s) [%(threadName)s]'
+    datefmt: '%Y-%m-%d %H:%M:%S'
+  colored:
+    (): boilerplate_module.logger.ColorFormatter  # Path to your ColorFormatter class
+    format: '%(asctime)s.%(msecs)03d %(levelname)-8s %(message)s (%(module)s) [%(threadName)s]'
+    datefmt: '%Y-%m-%d %H:%M:%S'
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: colored
+  file:
+    class: logging.handlers.RotatingFileHandler
+    level: DEBUG
+    formatter: simple
+    filename: tmp/log.log
+    encoding: utf-8
+    maxBytes: 104857600
+    backupCount: 5
+  stderr:
+    class: logging.handlers.RotatingFileHandler
+    level: ERROR
+    formatter: colored
+    filename: tmp/error.log
+    encoding: utf-8
+log_folder_creation:
+  create_folder: true
+loggers:
+  root:
+    level: DEBUG
+    handlers: [console, file, stderr]

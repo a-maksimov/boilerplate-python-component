@@ -1,0 +1,26 @@
+[importlinter]
+root_package = boilerplate_module
+include_external_packages = true
+exclude_type_checking_imports = true
+
+[importlinter:contract:layers]
+name = Project Layered Architecture
+type = layers
+
+containers =
+  boilerplate_module
+
+layers =
+  cli
+  logger
+  config
+
+[importlinter:contract:tests-restrictions]
+name = Explicit import restrictions for tests
+type = forbidden
+
+source_modules =
+  boilerplate_module
+
+forbidden_modules =
+  tests
