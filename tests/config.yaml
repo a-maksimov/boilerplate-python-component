@@ -1,4 +1,4 @@
 test_data:
  - name: integration_test
-   mock_folder: "integration_test_test_dataset"
-   reference_folder: "integration_test_test_reference"
+   mock_folder: "integration_test_dataset"
+   reference_folder: "integration_test_reference"
