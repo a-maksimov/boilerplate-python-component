@@ -6,7 +6,7 @@ from typing import Optional
 
 import yaml
 
-from boilerplate_module.config import (
+from boilerplate_python_component.config import (
     DEFAULT_LOG_FILE,
     DEFAULT_LOG_LEVEL,
     DEFAULT_OUTPUT_FOLDER,

@@ -1,5 +1,5 @@
-from boilerplate_module.cli import parse_arguments
-from boilerplate_module.optimizer import Optimizer
+from boilerplate_python_component.cli import parse_arguments
+from boilerplate_python_component.optimizer import Optimizer
 
 
 def main():

@@ -1,6 +1,6 @@
 from pulp import LpMinimize, LpProblem, LpVariable, lpSum
 
-from boilerplate_module.logger import get_logger
+from boilerplate_python_component.logger import get_logger
 
 
 def knapsack(values: list[int], weights: list[int], capacity: int) -> dict[str, int]:
