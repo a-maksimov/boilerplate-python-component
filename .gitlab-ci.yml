@@ -28,28 +28,7 @@ test:
     - job: pre-commit
   only:
     - merge_requests
-  variables:
-    POSTGRES_DB: $DB_NAME
-    POSTGRES_USER: $DB_USERNAME
-    POSTGRES_PASSWORD: $DB_PASSWORD
-  services:
-    - name: postgres:13-alpine
-      alias: $DB_HOST
   before_script:
-    - apt-get update && apt-get install -y postgresql-client
-    # ensure the compiled extensions are here:
-    - echo "Compiled extensions:"
-    - find . -type f -name '*.so' -print
-    - psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USERNAME" -d "$DB_NAME" -c 'SELECT version();'
-    - |
-      cat <<EOF > .env
-      DB_HOST=$DB_HOST
-      DB_PORT=$DB_PORT
-      DB_USERNAME=$DB_USERNAME
-      DB_PASSWORD=$DB_PASSWORD
-      DB_NAME=$DB_NAME
-      DB_SCHEMA=$DB_SCHEMA
-      EOF
     - pip install poetry
     - poetry install --with dev
   script:

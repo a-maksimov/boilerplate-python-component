@@ -158,6 +158,22 @@ pyyaml = ">=5.1"
 virtualenv = ">=20.10.0"
 
 [[package]]
+name = "pulp"
+version = "3.2.1"
+description = "PuLP is an LP modeler written in python. PuLP can generate MPS or LP files and call GLPK, COIN CLP/CBC, CPLEX, and GUROBI to solve linear problems."
+optional = false
+python-versions = ">=3.9"
+groups = ["main"]
+files = [
+    {file = "pulp-3.2.1-py3-none-any.whl", hash = "sha256:c6cf7fe84cef15795bc7c27e2f3c6784db5cf6ebf68e94d5a659b02415f982c5"},
+    {file = "pulp-3.2.1.tar.gz", hash = "sha256:fc6c02c47c06342c586b175924add753cad7638ff6149b3b43e87ac6709ac469"},
+]
+
+[package.extras]
+open-py = ["cylp", "highspy", "pyscipopt"]
+public-py = ["coptpy", "gurobipy", "xpress"]
+
+[[package]]
 name = "pygments"
 version = "2.19.2"
 description = "Pygments is a syntax highlighting package written in Python."
@@ -281,4 +297,4 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11"
-content-hash = "6f9e1cd0e376459f0108d58f6116da45ccd64720255543e005a81654745ef4df"
+content-hash = "295b7313563e65946eaae309888d5051615efb8d546a292e170ec6687889cbff"
