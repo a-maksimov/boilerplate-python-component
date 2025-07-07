@@ -1,5 +1,5 @@
 [importlinter]
-root_package = boilerplate_module
+root_package = boilerplate_python_component
 include_external_packages = true
 exclude_type_checking_imports = true
 
@@ -8,7 +8,7 @@ name = Project Layered Architecture
 type = layers
 
 containers =
-  boilerplate_module
+  boilerplate_python_component
 
 layers =
   cli
@@ -20,7 +20,7 @@ name = Explicit import restrictions for tests
 type = forbidden
 
 source_modules =
-  boilerplate_module
+  boilerplate_python_component
 
 forbidden_modules =
   tests

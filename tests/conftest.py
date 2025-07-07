@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from boilerplate_module.optimizer import Optimizer
+from boilerplate_python_component.optimizer import Optimizer
 from tests.config import test_config
 
 

@@ -6,7 +6,7 @@ formatters:
     format: '%(asctime)s.%(msecs)03d %(levelname)-8s %(message)s (%(module)s) [%(threadName)s]'
     datefmt: '%Y-%m-%d %H:%M:%S'
   colored:
-    (): boilerplate_module.logger.ColorFormatter  # Path to your ColorFormatter class
+    (): boilerplate_python_component.logger.ColorFormatter  # Path to your ColorFormatter class
     format: '%(asctime)s.%(msecs)03d %(levelname)-8s %(message)s (%(module)s) [%(threadName)s]'
     datefmt: '%Y-%m-%d %H:%M:%S'
 handlers:

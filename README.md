@@ -61,7 +61,7 @@ poetry install
 ### Python API
 
 ```python
-from boilerplate_module.optimizer import Optimizer
+from boilerplate_python_component.optimizer import Optimizer
 
 # 1) Define your problem parameters
 values   = [60, 100, 120]
@@ -84,7 +84,7 @@ results = optimizer.run()
 
 Alternatively, you can use the built-in CLI:
 ```bash
-python -m boilerplate_module --values 60 100 120 --weights 10  20  30 --capacity 50
+python -m boilerplate_python_component --values 60 100 120 --weights 10  20  30 --capacity 50
 ```
 
 ## Development
