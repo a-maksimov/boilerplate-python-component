@@ -28,6 +28,21 @@ repos:
     hooks:
       - id: black
 
+  - repo: https://github.com/pylint-dev/pylint
+    rev: v3.3.7
+    hooks:
+      - id: pylint
+        name: pylint
+        entry: pylint
+        types: [python]
+        args:
+          [
+            "--fail-under=9.5",
+            "--output-format=colorized",
+            "--msg-template='{path}:{line}: [{msg_id}({symbol}), {obj}] {msg}'"  # Detailed format
+          ]
+        stages: [pre-commit, manual]
+
   - repo: https://github.com/PyCQA/flake8
     rev: 7.1.1
     hooks:

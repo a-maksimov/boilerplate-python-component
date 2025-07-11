@@ -20,3 +20,20 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.1"
 pre-commit = "^4.2.0"
+
+[tool.pylint.MASTER]
+max-args = 6  # Change the default from 5 to 6
+ignore-paths = ["tests/.*"]
+
+[tool.pylint.'MESSAGES CONTROL']
+disable = """
+    too-few-public-methods,
+    fixme,
+    logging-fstring-interpolation,
+    logging-format-interpolation,
+    raise-missing-from,
+    consider-using-f-string,
+    astroid-error,
+    missing-module-docstring,
+"""
+max-line-length = 88
