@@ -20,6 +20,7 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.1"
 pre-commit = "^4.2.0"
+pylint = "^3.3.7"
 
 [tool.pylint.MASTER]
 max-args = 6  # Change the default from 5 to 6

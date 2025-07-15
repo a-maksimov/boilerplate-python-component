@@ -27,6 +27,15 @@ def knapsack(values: list[int], weights: list[int], capacity: int) -> dict[str, 
 
 
 class Optimizer:
+    """Knapsack problem optimizer using PuLP under the hood.
+
+    Attributes:
+        _values (List[int]): the “values” vector for each item
+        _weights (List[int]): the “weights” vector for each item
+        _capacity (int): the knapsack capacity
+        _logger (logging.Logger): module logger
+    """
+
     def __init__(
         self,
         values: list[int],
@@ -43,6 +52,11 @@ class Optimizer:
         self._logger.info(f"{self} was successfully initialized.")
 
     def run(self) -> dict[str, int]:
+        """Solve the knapsack instance and log the solution.
+
+        Returns:
+            dict[str, int]: a mapping from variable names to chosen values
+        """
         self._logger.info(f"{self} is running...")
 
         solution = knapsack(self._values, self._weights, self._capacity)
