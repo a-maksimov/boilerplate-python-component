@@ -12,9 +12,10 @@ pre-commit:
   only:
     - merge_requests
   before_script:
-    - pip install pre-commit
+    - pip install poetry
+    - poetry install --with dev
   script:
-    - pre-commit run --all-files
+    - poetry run pre-commit run --all-files
 
 # --------------------------------------------------
 # 2) Run tests
