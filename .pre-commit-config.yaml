@@ -9,6 +9,14 @@ repos:
       - id: check-added-large-files
         args: ["--maxkb", "1500"]
       - id: requirements-txt-fixer
+      - id: mixed-line-ending
+        args:
+          - --fix=auto
+      - id: name-tests-test
+        exclude: tests/config\.py
+        args:
+          - --pytest
+      - id: detect-private-key
 
   - repo: https://github.com/PyCQA/isort
     rev: 5.13.2
@@ -20,6 +28,21 @@ repos:
     rev: 24.8.0
     hooks:
       - id: black
+
+  - repo: local
+    hooks:
+      - id: pylint
+        name: pylint
+        entry: pylint
+        language: system
+        types: [python]
+        require_serial: true
+        args:
+          [
+            "--fail-under=9.5",
+            "--output-format=colorized",
+            "--msg-template='{path}:{line}: [{msg_id}({symbol}), {obj}] {msg}'"
+          ]
 
   - repo: https://github.com/PyCQA/flake8
     rev: 7.1.1

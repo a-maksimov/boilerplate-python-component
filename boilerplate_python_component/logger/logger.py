@@ -21,6 +21,8 @@ LOGGER_CONFIG_FILE_PATH = REPO_ROOT / LOGGER_CONFIG_FILE
 
 
 class ColorFormatter(logging.Formatter):
+    """Logging formatter that injects ANSI color codes based on severity level."""
+
     # Define ANSI color codes as class-level constants
     COLORS = {
         logging.DEBUG: "\x1b[38;5;7m",  # Grey
@@ -35,12 +37,18 @@ class ColorFormatter(logging.Formatter):
         super().__init__(fmt=fmt, datefmt=datefmt)
         self.default_fmt = fmt
 
-    def format(self, record):
+    def format(self, record: logging.LogRecord) -> str:
+        """Format a LogRecord, applying color to the LEVELNAME prefix.
+
+        Overrides the base Formatter.format to wrap the
+        level name in ANSI escape sequences.
+        """
         # Set color based on the log level, defaulting to no color
         color = self.COLORS.get(record.levelno, "")
         log_fmt = f"{color}{self.default_fmt}{self.RESET}"
 
         # Temporarily set the formatter _style to the colorized version
+        # pylint: disable=protected-access
         self._style._fmt = log_fmt
         return super().format(record)
 
